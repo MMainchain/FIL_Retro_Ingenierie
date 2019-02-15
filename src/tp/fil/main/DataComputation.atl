@@ -6,17 +6,17 @@ create OUT : Data from IN : Java;
 
 rule Model2Model {
 	from 
-		m: Java!Package (
+		s: Java!Package (
 			-- Sélection du package ayant parent 'petstore' et nom 'model'
-			if m.package.oclIsUndefined()
+			if s.package.oclIsUndefined()
 				then false 
-				else m.name = 'model' and m.package.name = 'petstore' 
+				else s.name = 'model' and s.package.name = 'petstore' 
 			endif 
 		)
 	to 
-		d:
+		t:
 			Data!Model (
-				classes <- d.ownedElements
+				classes <- s.ownedElements
 								->select(elem | elem.oclIsTypeOf(Java!ClassDeclaration))
 								->collect(elem | thisModule.ClassDeclaration2Classes(elem))
 			)
@@ -24,15 +24,15 @@ rule Model2Model {
 
 lazy rule ClassDeclaration2Classes {
 	from
-		c: Java!ClassDeclaration
-		(if c.package.oclIsUndefined()
+		s: Java!ClassDeclaration
+		(if s.package.oclIsUndefined()
 			then false 
-			else c.package.name = 'model'
+			else s.package.name = 'model'
 		endif)
 	to
-		d: Data!Classe (
-			name <- d.name,
-			attributs <- d.bodyDeclarations
+		t: Data!Classe (
+			name <- s.name,
+			attributs <- s.bodyDeclarations
 								->select(att | att.oclIsTypeOf(Java!FieldDeclaration))
 								->collect(att | thisModule.FieldDeclaration2Attribut(att))
 		)
@@ -43,7 +43,7 @@ lazy rule FieldDeclaration2Attribut {
  		f: Java!FieldDeclaration
 		(not f.type.oclIsUndefined())
 	to 
-		a: Data!Attribut (
+		t: Data!Attribut (
 			name <- f.fragments.first().name,
 			type <- f.type.type.name
 		)		
