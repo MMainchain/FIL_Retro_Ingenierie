@@ -1,6 +1,6 @@
 package data.computation;
 
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * 
@@ -20,5 +20,5 @@ public interface packageContainer {
 	 * 
 	 * @return
 	 */
-	public List<JavaPackageEObject> getPackages();
+	public HashMap<String, JavaPackageEObject> getPackages();
 }

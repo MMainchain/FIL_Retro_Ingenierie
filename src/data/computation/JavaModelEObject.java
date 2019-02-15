@@ -1,6 +1,7 @@
 package data.computation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -14,6 +15,8 @@ import org.eclipse.emf.ecore.EObject;
  *
  */
 public class JavaModelEObject extends JavaEObject implements packageContainer {
+	
+	private HashMap<String, JavaPackageEObject> packages;
 
 	/**
 	 * 
@@ -21,6 +24,19 @@ public class JavaModelEObject extends JavaEObject implements packageContainer {
 	 */
 	public JavaModelEObject(EObject modelObject) {
 		super(modelObject);
+		
+		packages = new HashMap<String, JavaPackageEObject>();
+		
+		Iterator<EObject> elements;
+		elements = this.rootObject.eContents().iterator();
+		
+		while(elements.hasNext()) {
+			EObject currentElement = elements.next();
+			
+			if (currentElement.eClass().getName().equals(JavaEObjectFactory.PACKAGE_TYPE)) {
+				packages.put(this.getEObjectName(currentElement), JavaEObjectFactory.createJavaPackageEobject(currentElement));
+			}
+		}
 	}
 
 	/**
@@ -33,43 +49,23 @@ public class JavaModelEObject extends JavaEObject implements packageContainer {
 		String[] packagesNames = string.split(Pattern.quote("."), 2);
 		String firstPackageName = packagesNames[0];
 		
-		Iterator<EObject> packages;
-		packages = this.rootObject.eContents().iterator();
+		JavaPackageEObject wantedPackage = packages.get(firstPackageName);
 		
-		while(packages.hasNext()) {
-			EObject currentPackagesElement = packages.next();
-			if (currentPackagesElement.eClass().getName().equals(JavaEObjectFactory.PACKAGE_TYPE) &&
-					this.getEObjectName(currentPackagesElement).equals(firstPackageName)) {
-				System.out.println("Go to package : " + this.getEObjectName(currentPackagesElement));
-				JavaPackageEObject wantedPackage = JavaEObjectFactory.createJavaPackageEobject(currentPackagesElement);
-				
-				if (packagesNames.length > 1) {
-					return wantedPackage.getPackage(packagesNames[1]);
-				}
-				
-				return wantedPackage;
-			}
+		if (packages == null)
+			throw new NoSuchElementException("No packages found for " + firstPackageName + " in " + this.getEObjectName());
+		
+		if (packagesNames.length > 1) {
+			return wantedPackage.getPackage(packagesNames[1]);
 		}
 		
-		throw new NoSuchElementException("No packages found for " + firstPackageName + " in " + this.getEObjectName());
+		return wantedPackage;
 	}
 
 	/**
 	 * 
 	 */
-	public List<JavaPackageEObject> getPackages() {
-		List<JavaPackageEObject> wantedPackages = new ArrayList<JavaPackageEObject>();
-		Iterator<EObject> packages;
-		packages = this.rootObject.eContents().iterator();
-		
-		while(packages.hasNext()) {
-			EObject currentPackagesElement = packages.next();
-			if (currentPackagesElement.eClass().getName().equals(JavaEObjectFactory.PACKAGE_TYPE)) {
-				wantedPackages.add(JavaEObjectFactory.createJavaPackageEobject(currentPackagesElement));
-			}
-		}
-		
-		return wantedPackages;
+	public HashMap<String, JavaPackageEObject> getPackages() {
+		return this.packages;
 	}
 
 }

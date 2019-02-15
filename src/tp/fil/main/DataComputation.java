@@ -2,13 +2,12 @@ package tp.fil.main;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -19,7 +18,6 @@ import org.eclipse.gmt.modisco.java.emf.JavaPackage;
 import data.computation.JavaClassEObject;
 import data.computation.JavaEObjectFactory;
 import data.computation.JavaModelEObject;
-import data.computation.JavaPackageEObject;
 
 public class DataComputation {
 	
@@ -52,17 +50,15 @@ public class DataComputation {
 			// Get root model
 			JavaModelEObject model = JavaEObjectFactory.createJavaModelEobject(javaModel.getContents().get(0));
 			// Go to wanted package and get classes
-			List<JavaClassEObject> classes = model.getPackage("com.sun.javaee.blueprints.petstore.model").getClasses();
-			
+			HashMap<String, JavaClassEObject> classes = model.getPackage("com.sun.javaee.blueprints.petstore.model").getClasses();
 			// List class
 			System.out.println("Class of com.sun.javaee.blueprints.petstore.model : ");
-			Iterator<JavaClassEObject> iteratorClasses = classes.iterator();
+			Iterator<Entry<String, JavaClassEObject>> iteratorClasses = classes.entrySet().iterator();
 			while(iteratorClasses.hasNext()) {
-				JavaClassEObject javaClass = iteratorClasses.next();
-				System.out.println(javaClass.getEObjectName());
+				Entry<String, JavaClassEObject> pair = iteratorClasses.next();
+		        System.out.println(pair.getKey() + " : " + pair.getValue().getFields().size());
+		        iteratorClasses.remove();
 			}
-			
-			//TO BE COMPLETED
 			
 			/*
 			 * End of the part to be completed...
@@ -78,25 +74,4 @@ public class DataComputation {
 			e.printStackTrace();
 		}
 	}
-	
-	public static EObject getPackage(String packageName, EObject root) {
-		Iterator<EObject> packages;
-		packages = root.eContents().iterator();
-		
-		while(packages.hasNext()) {
-			EObject currentPackagesElement = packages.next();
-			if (currentPackagesElement.eClass().getName().equals("Package") &&
-					getEObjectName(currentPackagesElement).equals(packageName)) {
-				System.out.println("Go to package : " + getEObjectName(currentPackagesElement));
-				return currentPackagesElement;
-			}
-		}
-		return null;
-	}
-	
-	public static String getEObjectName(EObject object) {
-		EStructuralFeature name = object.eClass().getEStructuralFeature("name");
-		return (String) object.eGet(name);
-	}
-	
 }

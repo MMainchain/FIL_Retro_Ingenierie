@@ -1,7 +1,7 @@
 package data.computation;
 
-import java.util.List;
+import java.util.HashMap;
 
 public interface classContainer {
-	public List<JavaClassEObject> getClasses();
+	public HashMap<String, JavaClassEObject> getClasses();
 }

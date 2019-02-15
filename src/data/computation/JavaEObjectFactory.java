@@ -1,6 +1,10 @@
 package data.computation;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.gmt.modisco.java.emf.impl.NamedElementImpl;
 
 /**
  * 
@@ -14,6 +18,9 @@ public class JavaEObjectFactory {
 	public final static String CLASS_TYPE = "ClassDeclaration";
 	public final static String FIELD_TYPE = "FieldDeclaration";
 	public final static String METHOD_TYPE = "MethodDeclaration";
+	public final static String MODIFIER_TYPE = "Modifier";
+	public final static String TYPE_TYPE = "TypeAccess";
+	public final static String VARIABLE_TYPE = "VariableDeclarationFragment";
 	
 	/**
 	 * 
@@ -61,6 +68,42 @@ public class JavaEObjectFactory {
 	
 	/**
 	 * 
+	 * @param currentElement
+	 * @return
+	 */
+	public static String createJavaVariableEobject(EObject object) {
+		if (!verifiedType(object, VARIABLE_TYPE))
+			throw new IllegalArgumentException("Given object cannot be resolve to Java variable type : "+ getType(object) + " given.");
+		EStructuralFeature name = object.eClass().getEStructuralFeature("name");
+		return (String) object.eGet(name);
+	}
+	
+	/**
+	 * 
+	 * @param currentElement
+	 * @return
+	 */
+	public static String createJavaTypeEobject(EObject object) {
+		if (!verifiedType(object, TYPE_TYPE))
+			throw new IllegalArgumentException("Given object cannot be resolve to Java type type : "+ getType(object) + " given.");
+		EStructuralFeature type = object.eClass().getEStructuralFeature("type");
+		return ((NamedElementImpl) object.eGet(type)).getName();
+	}
+	
+	/**
+	 * 
+	 * @param currentElement
+	 * @return
+	 */
+	public static String createJavaModifierEobject(EObject object) {
+		if (!verifiedType(object, MODIFIER_TYPE))
+			throw new IllegalArgumentException("Given object cannot be resolve to Java type type : "+ getType(object) + " given.");
+		EStructuralFeature visibility = object.eClass().getEStructuralFeature("visibility");
+		return object.eGet(visibility).toString();
+	}
+	
+	/**
+	 * 
 	 * @param object
 	 * @param type
 	 * @return
@@ -77,5 +120,4 @@ public class JavaEObjectFactory {
 	private static String getType(EObject object) {
 		return object.eClass().getName();
 	}
-
 }
