@@ -4,3 +4,38 @@
 module DataComputation;
 create OUT : Data from IN : Java;
 
+rule Model2Model {
+	from 
+		s: Java!Model
+	to 
+		t:
+			Data!Model (
+				classes <- s.classFile.->select(p | p.ownedPackages.notEmpty())
+			)
+}
+
+rule ClassDeclaration2Classes {
+	from
+		s: Java!ClassDeclaration
+		(if s.package.oclIsUndefined()
+			then false 
+			else s.package.name = 'model' 
+		endif)
+	to
+		t: Data!Classe (
+			name <- s.name--,
+	--		attributs <- s.bodyDeclarations
+		)
+}
+
+-- rule vjreue {
+-- 	from 
+-- 		s: Java!FieldDeclaration
+--	to 
+--		t: Data!Attribut (
+--			name <- s.name,
+--			type <- s.type
+--		)
+--		
+--}
+
