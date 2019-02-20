@@ -8,13 +8,15 @@
 	
 	<img src="http://yuml.me/diagram/scruffy/class/
 	[for (classe : Classe | model.classes)]
-		['['/][classe.name + '|'/]
+		['['/][classe.name/]|
 
 		[for (att : Attribut | classe.attributs)]
-			['-' + att.name + ' : ' + att.type + ';'/]
+			[if not (att.type.contains('.'))]
+				- [att.name/] : [att.type/];
+			[/if]
 		[/for]
-		
-		['],'/]
+
+		[']'/],
 	[/for]
 	">
 

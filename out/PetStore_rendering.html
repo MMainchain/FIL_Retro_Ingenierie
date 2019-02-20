@@ -1,0 +1,105 @@
+	
+	<img src="http://yuml.me/diagram/scruffy/class/
+		[SellerContactInfo|
+
+				- contactInfoID : String;
+				- lastName : String;
+				- firstName : String;
+				- email : String;
+
+		],
+		[Tag|
+
+				- tagID : int;
+				- tag : String;
+				- refCount : int;
+
+		],
+		[Address|
+
+				- addressID : String;
+				- street1 : String;
+				- street2 : String;
+				- city : String;
+				- state : String;
+				- zip : String;
+				- latitude : double;
+				- longitude : double;
+				- COMMA : String;
+
+		],
+		[FileUploadResponse|
+
+				- itemId : String;
+				- productId : String;
+				- message : String;
+				- status : String;
+				- duration : String;
+				- durationString : String;
+				- startDate : String;
+				- endDate : String;
+				- uploadSize : String;
+				- thumbnail : String;
+
+		],
+		[Category|
+
+				- categoryID : String;
+				- name : String;
+				- description : String;
+				- imageURL : String;
+
+		],
+		[RatingBean|
+
+				- itemId : String;
+				- grade : int;
+				- cf : CatalogFacade;
+
+		],
+		[PayPalBean|
+
+				- postData : BuyNowPostData;
+
+		],
+		[ZipLocation|
+
+				- zipCode : int;
+				- city : String;
+				- state : String;
+
+		],
+		[Item|
+
+				- itemID : String;
+				- productID : String;
+				- name : String;
+				- description : String;
+				- imageURL : String;
+				- imageThumbURL : String;
+				- price : BigDecimal;
+				- address : Address;
+				- contactInfo : SellerContactInfo;
+				- totalScore : int;
+				- numberOfVotes : int;
+				- disabled : int;
+
+		],
+		[Product|
+
+				- productID : String;
+				- categoryID : String;
+				- name : String;
+				- description : String;
+				- imageURL : String;
+
+		],
+		[CatalogFacade|
+
+				- emf : EntityManagerFactory;
+				- utx : UserTransaction;
+				- bDebug : boolean;
+
+		],
+	">
+

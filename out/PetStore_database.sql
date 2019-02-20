@@ -1,79 +1,79 @@
 		CREATE TABLE SellerContactInfo (
-					contactInfoID VARCHAR,
+					contactInfoID  VARCHAR,
 					
-					lastName VARCHAR,
+					lastName  VARCHAR,
 					
-					firstName VARCHAR,
+					firstName  VARCHAR,
 					
-					email VARCHAR,
+					email  VARCHAR,
 					
 		)
 		CREATE TABLE Tag (
-					tagID INT,
+					tagID  INT,
 					
 					items  VARCHAR,
 					
-					tag VARCHAR,
+					tag  VARCHAR,
 					
-					refCount INT,
+					refCount  INT,
 					
 		)
 		CREATE TABLE Address (
-					addressID VARCHAR,
+					addressID  VARCHAR,
 					
-					street1 VARCHAR,
+					street1  VARCHAR,
 					
-					street2 VARCHAR,
+					street2  VARCHAR,
 					
-					city VARCHAR,
+					city  VARCHAR,
 					
-					state VARCHAR,
+					state  VARCHAR,
 					
-					zip VARCHAR,
+					zip  VARCHAR,
 					
 					latitude  VARCHAR,
 					
 					longitude  VARCHAR,
 					
-					COMMA VARCHAR,
+					COMMA  VARCHAR,
 					
 		)
 		CREATE TABLE FileUploadResponse (
-					itemId VARCHAR,
+					itemId  VARCHAR,
 					
-					productId VARCHAR,
+					productId  VARCHAR,
 					
-					message VARCHAR,
+					message  VARCHAR,
 					
-					status VARCHAR,
+					status  VARCHAR,
 					
-					duration VARCHAR,
+					duration  VARCHAR,
 					
-					durationString VARCHAR,
+					durationString  VARCHAR,
 					
-					startDate VARCHAR,
+					startDate  VARCHAR,
 					
-					endDate VARCHAR,
+					endDate  VARCHAR,
 					
-					uploadSize VARCHAR,
+					uploadSize  VARCHAR,
 					
-					thumbnail VARCHAR,
+					thumbnail  VARCHAR,
 					
 		)
 		CREATE TABLE Category (
-					categoryID VARCHAR,
+					categoryID  VARCHAR,
 					
-					name VARCHAR,
+					name  VARCHAR,
 					
-					description VARCHAR,
+					description  VARCHAR,
 					
-					imageURL VARCHAR,
+					imageURL  VARCHAR,
 					
 		)
 		CREATE TABLE RatingBean (
-					itemId VARCHAR,
+					itemId  VARCHAR,
 					
-					grade INT,
+					grade  INT,
 					
 					cf  VARCHAR,
 					
@@ -83,25 +83,25 @@
 					
 		)
 		CREATE TABLE ZipLocation (
-					zipCode INT,
+					zipCode  INT,
 					
-					city VARCHAR,
+					city  VARCHAR,
 					
-					state VARCHAR,
+					state  VARCHAR,
 					
 		)
 		CREATE TABLE Item (
-					itemID VARCHAR,
+					itemID  VARCHAR,
 					
-					productID VARCHAR,
+					productID  VARCHAR,
 					
-					name VARCHAR,
+					name  VARCHAR,
 					
-					description VARCHAR,
+					description  VARCHAR,
 					
-					imageURL VARCHAR,
+					imageURL  VARCHAR,
 					
-					imageThumbURL VARCHAR,
+					imageThumbURL  VARCHAR,
 					
 					price  VARCHAR,
 					
@@ -109,25 +109,25 @@
 					
 					contactInfo  VARCHAR,
 					
-					totalScore INT,
+					totalScore  INT,
 					
-					numberOfVotes INT,
+					numberOfVotes  INT,
 					
-					disabled INT,
+					disabled  INT,
 					
 					tags  VARCHAR,
 					
 		)
 		CREATE TABLE Product (
-					productID VARCHAR,
+					productID  VARCHAR,
 					
-					categoryID VARCHAR,
+					categoryID  VARCHAR,
 					
-					name VARCHAR,
+					name  VARCHAR,
 					
-					description VARCHAR,
+					description  VARCHAR,
 					
-					imageURL VARCHAR,
+					imageURL  VARCHAR,
 					
 		)
 		CREATE TABLE CatalogFacade (
