@@ -92,6 +92,17 @@ public class JavaEObjectFactory {
 	
 	/**
 	 * 
+	 * @param object
+	 * @return
+	 */
+	public static JavaFunctionEObject createJavaFunctionEobject(EObject object) {
+		if (!verifiedType(object, METHOD_TYPE))
+			throw new IllegalArgumentException("Given object cannot be resolve to Java method type : "+ getType(object) + " given.");
+		return new JavaFunctionEObject(object);
+	}
+	
+	/**
+	 * 
 	 * @param currentElement
 	 * @return
 	 */

@@ -56,7 +56,7 @@ public class DataComputation {
 			Iterator<Entry<String, JavaClassEObject>> iteratorClasses = classes.entrySet().iterator();
 			while(iteratorClasses.hasNext()) {
 				Entry<String, JavaClassEObject> pair = iteratorClasses.next();
-		        System.out.println(pair.getKey() + " : " + pair.getValue().getFields().size());
+		        System.out.println(pair.getKey() + " : " + pair.getValue().getFunctions().size());
 		        iteratorClasses.remove();
 			}
 			
