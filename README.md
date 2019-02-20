@@ -20,3 +20,4 @@ Model Driven Reverse Engineering (MDRE) in practice
 
 
 ## Step 4 – Integrate as a workflow with MoDisco 
+![](images/step4_workflow.png)
