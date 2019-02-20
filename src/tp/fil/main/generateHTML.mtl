@@ -2,11 +2,21 @@
 [module generateHTML('http://data') /]
 [comment 'platform:/resource/tp.fil/src/tp/fil/resources/Data.ecore' /]
  
-[template public generateHTML(model : Model)]
+[template public generateHTML(model : Model) post (trim())]
 [comment @main/]  
 [file ('PetStore_rendering.html', false, 'UTF-8')]
 	
-	[comment TO BE COMPLETED/]
+	<img src="http://yuml.me/diagram/scruffy/class/
+	[for (classe : Classe | model.classes)]
+		['['/][classe.name + '|'/]
+
+		[for (att : Attribut | classe.attributs)]
+			['-' + att.name + ' : ' + att.type + ';'/]
+		[/for]
+		
+		['],'/]
+	[/for]
+	">
 
 [/file]
 [/template]
