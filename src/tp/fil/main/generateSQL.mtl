@@ -2,20 +2,39 @@
 [module generateSQL('http://data')]
 [comment 'platform:/resource/tp.fil/src/tp/fil/resources/Data.ecore' /]
 
-[template public generateSQL(model : Model) post (trim())]
+[template public generateSQL(model : Model) post (trim()) ]
 [comment @main/] 
 [file ('PetStore_database.sql', false, 'UTF-8')]
-	
 	[for (c : Classe | model.classes)]
-		CREATE TABLE [c.name/] (
-			[for (a : Attribut | c.attributs)]
-				[a.name/] VARCHAR,
-			[/for]
-		)
+		[generateTable(c)/]
 	[/for]
-	
-
 [/file]
+[/template]
+
+
+[template public generateTable(classe : Classe) ]
+CREATE TABLE [classe.name/] (
+	[for (att : Attribut | classe.attributs)]
+		[generateAttribut(att)/]
+	[/for]
+)
+[/template]
+
+
+[template public generateAttribut(att : Attribut) ]
+	[att.name/] [getType(att)/]
+[/template]
+
+
+[template public getType(att : Attribut) ]
+[if (att.type = 'String')] VARCHAR,
+	[elseif (att.type = 'int')] INT,
+	[elseif (att.type = 'Integer')] INTEGER,
+	[elseif (att.type = 'float')] FLOAT,
+	[elseif (att.type = 'Float')] FLOAT,
+	[elseif (att.type = 'float')] FLOAT,
+	[else] VARCHAR,
+[/if]
 [/template]
 
 
