@@ -2,11 +2,20 @@
 [module generateSQL('http://data')]
 [comment 'platform:/resource/tp.fil/src/tp/fil/resources/Data.ecore' /]
 
-[template public generateSQL(model : Model)]
+[template public generateSQL(model : Model) post (trim())]
 [comment @main/] 
 [file ('PetStore_database.sql', false, 'UTF-8')]
 	
-	[comment TO BE COMPLETED/]
+	[for (c : Classe | model.classes)]
+		CREATE TABLE [c.name/] (
+			[for (a : Attribut | c.attributs)]
+				[a.name/] VARCHAR,
+			[/for]
+		)
+	[/for]
+	
 
 [/file]
 [/template]
+
+
