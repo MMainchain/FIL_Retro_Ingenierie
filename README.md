@@ -2,6 +2,7 @@
 Model Driven Reverse Engineering (MDRE) in practice
 14th, 15th and 21st of February 2019 
 
+
 ## Step 2 – Extract/Compute a Data model with Java & ATL
 
 ### ATL transformation
@@ -16,3 +17,7 @@ Model Driven Reverse Engineering (MDRE) in practice
 
 ### To HTML
 ![](images/step3_tosql.png)
+
+
+## Step 4 – Integrate as a workflow with MoDisco 
+![](images/step4_workflow.png)
