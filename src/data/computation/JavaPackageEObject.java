@@ -1,13 +1,13 @@
 package data.computation;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * 
@@ -19,10 +19,12 @@ public class JavaPackageEObject extends JavaEObject implements packageContainer,
 	private HashMap<String, JavaPackageEObject> packages;
 	private HashMap<String, JavaClassEObject> classes;
 	
-	public JavaPackageEObject(EObject javaPackage) {
-		super(javaPackage);
+	public JavaPackageEObject(EObject javaPackage, EPackage ePackage) {
+		super(javaPackage, ePackage);
 		packages = new HashMap<String, JavaPackageEObject>();
 		classes = new HashMap<String, JavaClassEObject>();
+		
+		this.targetObject = new EObjectImpl() {};
 		
 		Iterator<EObject> elements;
 		elements = this.rootObject.eContents().iterator();
@@ -31,9 +33,11 @@ public class JavaPackageEObject extends JavaEObject implements packageContainer,
 			EObject currentElement = elements.next();
 			
 			if (currentElement.eClass().getName().equals(JavaEObjectFactory.PACKAGE_TYPE)) {
-				packages.put(this.getEObjectName(currentElement), JavaEObjectFactory.createJavaPackageEobject(currentElement));
+				JavaPackageEObject localPackage = JavaEObjectFactory.createJavaPackageEobject(currentElement, ePackage);
+				packages.put(this.getEObjectName(currentElement), localPackage);
 			} else if (currentElement.eClass().getName().equals(JavaEObjectFactory.CLASS_TYPE)) {
-				classes.put(this.getEObjectName(currentElement), JavaEObjectFactory.createJavaClassEobject(currentElement));
+				JavaClassEObject localClass = JavaEObjectFactory.createJavaClassEobject(currentElement, ePackage);
+				classes.put(this.getEObjectName(currentElement), localClass);
 			}
 		}
 	}
@@ -68,5 +72,4 @@ public class JavaPackageEObject extends JavaEObject implements packageContainer,
 	public HashMap<String, JavaClassEObject> getClasses() {
 		return this.classes;
 	}
-
 }

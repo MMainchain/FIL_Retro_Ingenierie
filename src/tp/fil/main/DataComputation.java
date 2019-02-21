@@ -1,12 +1,16 @@
 package tp.fil.main;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -44,28 +48,34 @@ public class DataComputation {
 			
 			javaModel = resSet.createResource(URI.createFileURI("PetStore_java.xmi"));
 			javaModel.load(null);
+			dataModel = resSet.createResource(URI.createFileURI("test_data.xmi"));
 			
-			dataModel = resSet.createResource(URI.createFileURI("PetStore_data.xmi"));
-			
+			// Get EPackage
+			EPackage ePackage = (EPackage) dataMetamodel.getContents().get(0);
+			// Get model EClass
+			EClass testModel = (EClass) ePackage.getEClassifier("Model");
+			// Create a model Object
+			EObject testModelObject = ePackage.getEFactoryInstance().create(testModel);
+			// Instantiate an EClass
+			List<EObject> listClass = new ArrayList<EObject>();
 			// Get root model
-			JavaModelEObject model = JavaEObjectFactory.createJavaModelEobject(javaModel.getContents().get(0));
+			JavaModelEObject model = JavaEObjectFactory.createJavaModelEobject(javaModel.getContents().get(0), ePackage);
 			// Go to wanted package and get classes
 			HashMap<String, JavaClassEObject> classes = model.getPackage("com.sun.javaee.blueprints.petstore.model").getClasses();
 			// List class
-			System.out.println("Class of com.sun.javaee.blueprints.petstore.model : ");
 			Iterator<Entry<String, JavaClassEObject>> iteratorClasses = classes.entrySet().iterator();
 			while(iteratorClasses.hasNext()) {
 				Entry<String, JavaClassEObject> pair = iteratorClasses.next();
-		        System.out.println(pair.getKey() + " : " + pair.getValue().getFunctions().size());
+				// Add class to list
+				listClass.add(pair.getValue().getTargetObject());
 		        iteratorClasses.remove();
 			}
 			
-			/*
-			 * End of the part to be completed...
-			 */
-			
+			// Add list class to model
+			testModelObject.eSet(testModel.getEStructuralFeature("classes"), listClass);
+			// Save model
+			dataModel.getContents().add(testModelObject);
 			dataModel.save(null);
-			dataModel.save(new FileOutputStream("out_java.xmi"), null);
 			
 			javaModel.unload();
 			dataModel.unload();

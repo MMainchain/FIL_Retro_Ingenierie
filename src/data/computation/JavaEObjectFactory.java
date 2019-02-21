@@ -1,8 +1,7 @@
 package data.computation;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gmt.modisco.java.emf.impl.NamedElementImpl;
 
@@ -27,10 +26,10 @@ public class JavaEObjectFactory {
 	 * @param object
 	 * @return
 	 */
-	public static JavaModelEObject createJavaModelEobject(EObject object) {
+	public static JavaModelEObject createJavaModelEobject(EObject object, EPackage ePackage) {
 		if (!verifiedType(object, MODEL_TYPE))
 			throw new IllegalArgumentException("Given object cannot be resolve to Java Model type : "+ getType(object) + " given.");
-		return new JavaModelEObject(object);
+		return new JavaModelEObject(object, ePackage);
 	}
 	
 	/**
@@ -38,10 +37,10 @@ public class JavaEObjectFactory {
 	 * @param object
 	 * @return
 	 */
-	public static JavaPackageEObject createJavaPackageEobject(EObject object) {
+	public static JavaPackageEObject createJavaPackageEobject(EObject object, EPackage ePackage) {
 		if (!verifiedType(object, PACKAGE_TYPE))
 			throw new IllegalArgumentException("Given object cannot be resolve to Java package type : "+ getType(object) + " given.");
-		return new JavaPackageEObject(object);
+		return new JavaPackageEObject(object, ePackage);
 	}
 	
 	/**
@@ -49,10 +48,10 @@ public class JavaEObjectFactory {
 	 * @param object
 	 * @return
 	 */
-	public static JavaClassEObject createJavaClassEobject(EObject object) {
+	public static JavaClassEObject createJavaClassEobject(EObject object, EPackage ePackage) {
 		if (!verifiedType(object, CLASS_TYPE))
 			throw new IllegalArgumentException("Given object cannot be resolve to Java class type : "+ getType(object) + " given.");
-		return new JavaClassEObject(object);
+		return new JavaClassEObject(object, ePackage);
 	}
 	
 	/**
@@ -60,10 +59,10 @@ public class JavaEObjectFactory {
 	 * @param object
 	 * @return
 	 */
-	public static JavaFieldEObject createJavaFieldEobject(EObject object) {
+	public static JavaFieldEObject createJavaFieldEobject(EObject object, EPackage ePackage) {
 		if (!verifiedType(object, FIELD_TYPE))
 			throw new IllegalArgumentException("Given object cannot be resolve to Java field type : "+ getType(object) + " given.");
-		return new JavaFieldEObject(object);
+		return new JavaFieldEObject(object, ePackage);
 	}
 	
 	/**
@@ -71,7 +70,7 @@ public class JavaEObjectFactory {
 	 * @param currentElement
 	 * @return
 	 */
-	public static String createJavaVariableEobject(EObject object) {
+	public static String createJavaVariableEobject(EObject object, EPackage ePackage) {
 		if (!verifiedType(object, VARIABLE_TYPE))
 			throw new IllegalArgumentException("Given object cannot be resolve to Java variable type : "+ getType(object) + " given.");
 		EStructuralFeature name = object.eClass().getEStructuralFeature("name");
@@ -83,7 +82,7 @@ public class JavaEObjectFactory {
 	 * @param currentElement
 	 * @return
 	 */
-	public static String createJavaTypeEobject(EObject object) {
+	public static String createJavaTypeEobject(EObject object, EPackage ePackage) {
 		if (!verifiedType(object, TYPE_TYPE))
 			throw new IllegalArgumentException("Given object cannot be resolve to Java type type : "+ getType(object) + " given.");
 		EStructuralFeature type = object.eClass().getEStructuralFeature("type");
@@ -95,10 +94,10 @@ public class JavaEObjectFactory {
 	 * @param object
 	 * @return
 	 */
-	public static JavaFunctionEObject createJavaFunctionEobject(EObject object) {
+	public static JavaFunctionEObject createJavaFunctionEobject(EObject object, EPackage ePackage) {
 		if (!verifiedType(object, METHOD_TYPE))
 			throw new IllegalArgumentException("Given object cannot be resolve to Java method type : "+ getType(object) + " given.");
-		return new JavaFunctionEObject(object);
+		return new JavaFunctionEObject(object, ePackage);
 	}
 	
 	/**
@@ -106,7 +105,7 @@ public class JavaEObjectFactory {
 	 * @param currentElement
 	 * @return
 	 */
-	public static String createJavaModifierEobject(EObject object) {
+	public static String createJavaModifierEobject(EObject object, EPackage ePackage) {
 		if (!verifiedType(object, MODIFIER_TYPE))
 			throw new IllegalArgumentException("Given object cannot be resolve to Java type type : "+ getType(object) + " given.");
 		EStructuralFeature visibility = object.eClass().getEStructuralFeature("visibility");

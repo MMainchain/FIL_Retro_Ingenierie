@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ASCII"?>
+<data:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:data="http://data">
+  <classes xsi:type="data:Classe" name="Item">
+    <attributs name="itemID" type="String"/>
+    <attributs name="productID" type="String"/>
+    <attributs name="name" type="String"/>
+    <attributs name="description" type="String"/>
+    <attributs name="imageURL" type="String"/>
+    <attributs name="imageThumbURL" type="String"/>
+    <attributs name="price" type="BigDecimal"/>
+    <attributs name="address" type="Address"/>
+    <attributs name="contactInfo" type="SellerContactInfo"/>
+    <attributs name="totalScore" type="int"/>
+    <attributs name="numberOfVotes" type="int"/>
+    <attributs name="disabled" type="int"/>
+    <attributs name="tags" type="java.util.Collection&lt;com.sun.javaee.blueprints.petstore.model.Tag>"/>
+  </classes>
+  <classes xsi:type="data:Classe" name="FileUploadResponse">
+    <attributs name="itemId" type="String"/>
+    <attributs name="productId" type="String"/>
+    <attributs name="message" type="String"/>
+    <attributs name="status" type="String"/>
+    <attributs name="duration" type="String"/>
+    <attributs name="durationString" type="String"/>
+    <attributs name="startDate" type="String"/>
+    <attributs name="endDate" type="String"/>
+    <attributs name="uploadSize" type="String"/>
+    <attributs name="thumbnail" type="String"/>
+  </classes>
+  <classes xsi:type="data:Classe" name="Category">
+    <attributs name="categoryID" type="String"/>
+    <attributs name="name" type="String"/>
+    <attributs name="description" type="String"/>
+    <attributs name="imageURL" type="String"/>
+  </classes>
+  <classes xsi:type="data:Classe" name="Address">
+    <attributs name="addressID" type="String"/>
+    <attributs name="street1" type="String"/>
+    <attributs name="street2" type="String"/>
+    <attributs name="city" type="String"/>
+    <attributs name="state" type="String"/>
+    <attributs name="zip" type="String"/>
+    <attributs name="latitude" type="double"/>
+    <attributs name="longitude" type="double"/>
+    <attributs name="COMMA" type="String"/>
+  </classes>
+  <classes xsi:type="data:Classe" name="ZipLocation">
+    <attributs name="zipCode" type="int"/>
+    <attributs name="city" type="String"/>
+    <attributs name="state" type="String"/>
+  </classes>
+  <classes xsi:type="data:Classe" name="RatingBean">
+    <attributs name="itemId" type="String"/>
+    <attributs name="grade" type="int"/>
+    <attributs name="cf" type="CatalogFacade"/>
+  </classes>
+  <classes xsi:type="data:Classe" name="Product">
+    <attributs name="productID" type="String"/>
+    <attributs name="categoryID" type="String"/>
+    <attributs name="name" type="String"/>
+    <attributs name="description" type="String"/>
+    <attributs name="imageURL" type="String"/>
+  </classes>
+  <classes xsi:type="data:Classe" name="CatalogFacade">
+    <attributs name="emf" type="EntityManagerFactory"/>
+    <attributs name="utx" type="UserTransaction"/>
+    <attributs name="bDebug" type="boolean"/>
+  </classes>
+  <classes xsi:type="data:Classe" name="PayPalBean">
+    <attributs name="postData" type="BuyNowPostData"/>
+  </classes>
+  <classes xsi:type="data:Classe" name="Tag">
+    <attributs name="tagID" type="int"/>
+    <attributs name="items" type="java.util.Collection&lt;com.sun.javaee.blueprints.petstore.model.Item>"/>
+    <attributs name="tag" type="String"/>
+    <attributs name="refCount" type="int"/>
+  </classes>
+  <classes xsi:type="data:Classe" name="SellerContactInfo">
+    <attributs name="contactInfoID" type="String"/>
+    <attributs name="lastName" type="String"/>
+    <attributs name="firstName" type="String"/>
+    <attributs name="email" type="String"/>
+  </classes>
+</data:Model>

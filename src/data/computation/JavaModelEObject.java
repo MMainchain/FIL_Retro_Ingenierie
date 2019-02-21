@@ -1,13 +1,15 @@
 package data.computation;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMLContentHandlerImpl.XMI;
+import org.eclipse.gmt.modisco.java.emf.impl.ModelImpl;
 
 /**
  * 
@@ -22,8 +24,8 @@ public class JavaModelEObject extends JavaEObject implements packageContainer {
 	 * 
 	 * @param rootObject
 	 */
-	public JavaModelEObject(EObject modelObject) {
-		super(modelObject);
+	public JavaModelEObject(EObject modelObject, EPackage ePackage) {
+		super(modelObject, ePackage);
 		
 		packages = new HashMap<String, JavaPackageEObject>();
 		
@@ -34,7 +36,9 @@ public class JavaModelEObject extends JavaEObject implements packageContainer {
 			EObject currentElement = elements.next();
 			
 			if (currentElement.eClass().getName().equals(JavaEObjectFactory.PACKAGE_TYPE)) {
-				packages.put(this.getEObjectName(currentElement), JavaEObjectFactory.createJavaPackageEobject(currentElement));
+				JavaPackageEObject javaPackage = JavaEObjectFactory.createJavaPackageEobject(currentElement, ePackage);
+				packages.put(this.getEObjectName(currentElement), javaPackage);
+//				this.targetObject.eContents().add(javaPackage.getTargetObject());
 			}
 		}
 	}
@@ -68,4 +72,16 @@ public class JavaModelEObject extends JavaEObject implements packageContainer {
 		return this.packages;
 	}
 
+	/**
+	 * 
+	 * @param r
+	 */
+	public void save(Resource r) {
+		r.getContents().add(this.targetObject);
+	}
+	
+	@Override
+	public EObject getTargetObject() {
+		return this.targetObject;
+	}
 }

@@ -3,6 +3,7 @@ package data.computation;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
@@ -20,8 +21,8 @@ public class JavaFunctionEObject extends JavaEObject {
 	 * 
 	 * @param functionObject
 	 */
-	public JavaFunctionEObject(EObject functionObject) {
-		super(functionObject);
+	public JavaFunctionEObject(EObject functionObject, EPackage ePackage) {
+		super(functionObject, ePackage);
 		EStructuralFeature name = functionObject.eClass().getEStructuralFeature("name");
 		this.name = (String) functionObject.eGet(name);
 		Iterator<EObject> elements;
@@ -30,9 +31,9 @@ public class JavaFunctionEObject extends JavaEObject {
 		while(elements.hasNext()) {
 			EObject currentElement = elements.next();
 			if (currentElement.eClass().getName().equals(JavaEObjectFactory.TYPE_TYPE)) {
-				this.type = JavaEObjectFactory.createJavaTypeEobject(currentElement);
+				this.type = JavaEObjectFactory.createJavaTypeEobject(currentElement, ePackage);
 			} else if (currentElement.eClass().getName().equals(JavaEObjectFactory.MODIFIER_TYPE)) {
-				this.visibility = JavaEObjectFactory.createJavaModifierEobject(currentElement);
+				this.visibility = JavaEObjectFactory.createJavaModifierEobject(currentElement, ePackage);
 			}
 		}
 	}

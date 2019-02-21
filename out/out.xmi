@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:data="http://data">
+  <data:Model classes="/1 /6 /11 /21 /32 /37 /41 /43 /47 /61 /67"/>
+  <data:Classe name="SellerContactInfo" attributs="/2 /3 /4 /5"/>
+  <data:Attribut name="contactInfoID" type="String"/>
+  <data:Attribut name="lastName" type="String"/>
+  <data:Attribut name="firstName" type="String"/>
+  <data:Attribut name="email" type="String"/>
+  <data:Classe name="Tag" attributs="/7 /8 /9 /10"/>
+  <data:Attribut name="tagID" type="int"/>
+  <data:Attribut name="items" type="java.util.Collection&lt;com.sun.javaee.blueprints.petstore.model.Item>"/>
+  <data:Attribut name="tag" type="String"/>
+  <data:Attribut name="refCount" type="int"/>
+  <data:Classe name="Address" attributs="/12 /13 /14 /15 /16 /17 /18 /19 /20"/>
+  <data:Attribut name="addressID" type="String"/>
+  <data:Attribut name="street1" type="String"/>
+  <data:Attribut name="street2" type="String"/>
+  <data:Attribut name="city" type="String"/>
+  <data:Attribut name="state" type="String"/>
+  <data:Attribut name="zip" type="String"/>
+  <data:Attribut name="latitude" type="double"/>
+  <data:Attribut name="longitude" type="double"/>
+  <data:Attribut name="COMMA" type="String"/>
+  <data:Classe name="FileUploadResponse" attributs="/22 /23 /24 /25 /26 /27 /28 /29 /30 /31"/>
+  <data:Attribut name="itemId" type="String"/>
+  <data:Attribut name="productId" type="String"/>
+  <data:Attribut name="message" type="String"/>
+  <data:Attribut name="status" type="String"/>
+  <data:Attribut name="duration" type="String"/>
+  <data:Attribut name="durationString" type="String"/>
+  <data:Attribut name="startDate" type="String"/>
+  <data:Attribut name="endDate" type="String"/>
+  <data:Attribut name="uploadSize" type="String"/>
+  <data:Attribut name="thumbnail" type="String"/>
+  <data:Classe name="Category" attributs="/33 /34 /35 /36"/>
+  <data:Attribut name="categoryID" type="String"/>
+  <data:Attribut name="name" type="String"/>
+  <data:Attribut name="description" type="String"/>
+  <data:Attribut name="imageURL" type="String"/>
+  <data:Classe name="RatingBean" attributs="/38 /39 /40"/>
+  <data:Attribut name="itemId" type="String"/>
+  <data:Attribut name="grade" type="int"/>
+  <data:Attribut name="cf" type="CatalogFacade"/>
+  <data:Classe name="PayPalBean" attributs="/42"/>
+  <data:Attribut name="postData" type="BuyNowPostData"/>
+  <data:Classe name="ZipLocation" attributs="/44 /45 /46"/>
+  <data:Attribut name="zipCode" type="int"/>
+  <data:Attribut name="city" type="String"/>
+  <data:Attribut name="state" type="String"/>
+  <data:Classe name="Item" attributs="/48 /49 /50 /51 /52 /53 /54 /55 /56 /57 /58 /59 /60"/>
+  <data:Attribut name="itemID" type="String"/>
+  <data:Attribut name="productID" type="String"/>
+  <data:Attribut name="name" type="String"/>
+  <data:Attribut name="description" type="String"/>
+  <data:Attribut name="imageURL" type="String"/>
+  <data:Attribut name="imageThumbURL" type="String"/>
+  <data:Attribut name="price" type="BigDecimal"/>
+  <data:Attribut name="address" type="Address"/>
+  <data:Attribut name="contactInfo" type="SellerContactInfo"/>
+  <data:Attribut name="totalScore" type="int"/>
+  <data:Attribut name="numberOfVotes" type="int"/>
+  <data:Attribut name="disabled" type="int"/>
+  <data:Attribut name="tags" type="java.util.Collection&lt;com.sun.javaee.blueprints.petstore.model.Tag>"/>
+  <data:Classe name="Product" attributs="/62 /63 /64 /65 /66"/>
+  <data:Attribut name="productID" type="String"/>
+  <data:Attribut name="categoryID" type="String"/>
+  <data:Attribut name="name" type="String"/>
+  <data:Attribut name="description" type="String"/>
+  <data:Attribut name="imageURL" type="String"/>
+  <data:Classe name="CatalogFacade" attributs="/68 /69 /70"/>
+  <data:Attribut name="emf" type="EntityManagerFactory"/>
+  <data:Attribut name="utx" type="UserTransaction"/>
+  <data:Attribut name="bDebug" type="boolean"/>
+</xmi:XMI>
