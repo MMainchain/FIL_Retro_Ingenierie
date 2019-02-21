@@ -71,14 +71,6 @@ public class JavaModelEObject extends JavaEObject implements packageContainer {
 	public HashMap<String, JavaPackageEObject> getPackages() {
 		return this.packages;
 	}
-
-	/**
-	 * 
-	 * @param r
-	 */
-	public void save(Resource r) {
-		r.getContents().add(this.targetObject);
-	}
 	
 	@Override
 	public EObject getTargetObject() {

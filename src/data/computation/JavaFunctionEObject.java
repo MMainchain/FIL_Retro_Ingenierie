@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * @author Maël MAINCHAIN
  *
  */
-public class JavaFunctionEObject extends JavaEObject {
+public class JavaFunctionEObject extends JavaEObject implements ClassElement {
 	
 	private String visibility;
 	private String type;

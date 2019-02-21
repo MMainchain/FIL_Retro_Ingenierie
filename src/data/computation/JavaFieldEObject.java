@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EPackage;
  * @author Maël MAINCHAIN
  *
  */
-public class JavaFieldEObject extends JavaEObject {
+public class JavaFieldEObject extends JavaEObject implements ClassElement {
 	
 	private String visibility;
 	private String type;
@@ -46,6 +46,11 @@ public class JavaFieldEObject extends JavaEObject {
 		this.targetObject.eSet(classAttribut.getEStructuralFeature("type"), this.type);
 	}
 	
+	@Override
+	public String getEObjectName() {
+		return this.name;
+	}
+
 	/**
 	 * 
 	 * @return
@@ -60,10 +65,5 @@ public class JavaFieldEObject extends JavaEObject {
 	 */
 	public String getType() {
 		return this.type;
-	}
-	
-	@Override
-	public String getEObjectName() {
-		return this.name;
 	}
 }
